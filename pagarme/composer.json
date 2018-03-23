@@ -1,0 +1,23 @@
+{
+    "name": "infinauta/craftcommerce-pagarme",
+    "description": "A implementation of pagarme gateway for craft commerce",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/Users/infinauta/Dev/sites/packages/omnipay-pagarme",
+            "options": {
+              "symlink": true
+            }
+        }
+    ],
+    "require": {
+        "infinauta/omnipay-pagarme": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gui Gui",
+            "email": "guirams@gmail.com"
+        }
+    ]
+}
