@@ -9,11 +9,6 @@ class PagarmePlugin extends BasePlugin
 
     public function init()
     {
-
-        $order = craft()->commerce_orders->getOrderById('3396');
-        $paymentMethodId = $order->getPaymentMethod()->id;
-        $paymentMethod = $order->getPaymentMethod();
-
         Craft::import('plugins.pagarme.enums.Pagarme_TransactionStatusesEnums');
 
         $commerce = craft()->db->createCommand()
@@ -46,7 +41,7 @@ class PagarmePlugin extends BasePlugin
      */
     public function getVersion()
     {
-        return "0.0.1";
+        return "1.0.0";
     }
 
     /**
