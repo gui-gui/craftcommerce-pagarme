@@ -20,11 +20,18 @@ class PagarmePlugin extends BasePlugin
         if($commerce){
             $this->commerceInstalled = true;
         }
-
+        
         craft()->on('commerce_payments.onBeforeGatewayRequestSend', function($event){
+            $paymentMethod = $event->params['transaction']->getPaymentMethod()->class;
+            
+            if( $paymentMethod != 'Pagarme_Boleto' && $paymentMethod != 'Pagarme') {
+                return;
+            }
+
             $request = $event->params['request'];
             $transaction = $event->params['transaction'];
             $postback_url = UrlHelper::getActionUrl('pagarme/webhook/postback', ['commerceTransactionId' => $transaction->id, 'commerceTransactionHash' => $transaction->hash]);
+            PagarmePlugin::log("[INFO] Boleto Order: {$transaction->order->id}. PostbackUrl = {$postback_url}", LogLevel::Info);
             $request->setPostbackUrl($postback_url);
         });
     }
@@ -81,9 +88,9 @@ class PagarmePlugin extends BasePlugin
 
     // public function commerce_modifyItemBag($items, $order)
     // {   
-    //     $method = $order->getPaymentMethod->class;
+    //     paymentMethod = $order->getPaymentMethod->class;
 
-    //     if($method != 'Pagarme' && $method != 'Pagarme_Boleto') {
+    //     if(paymentMethod != 'Pagarme' && paymentMethod != 'Pagarme_Boleto') {
     //         return;
     //     }
         
