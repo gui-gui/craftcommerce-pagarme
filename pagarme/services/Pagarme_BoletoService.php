@@ -44,7 +44,7 @@ class Pagarme_BoletoService extends BaseApplicationComponent
             $order->orderStatusId = $successStatusId;
             $order->message = "Atualizado após notificação da API Pagarme";
             craft()->commerce_orders->saveOrder($order);
-            PagarmePlugin::log("Info: Order {$order->hash} updated after Postback to '{$successStatus->name}' status.", LogLevel::Info);
+            PagarmePlugin::log("Info: Order {$order->id} updated after Postback to '{$successStatus->name}' status.", LogLevel::Info);
         }
     }
 
